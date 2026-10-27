@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahwil — محول العملات</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col justify-between relative overflow-x-hidden">
+
+    <!-- Glowing Background Elements -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-cyan-500/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <!-- Header -->
+    <header class="border-b border-slate-800/80 bg-slate-950/60 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-black tracking-wide bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+                Tahwil
+            </h1>
+            <span class="text-xs font-semibold bg-emerald-950/80 text-emerald-400 border border-emerald-700/50 px-3.5 py-1.5 rounded-full shadow-inner">
+                By Adam Raslan
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-md mx-auto px-4 py-10 w-full relative z-10">
+        <div class="glass-card p-6 sm:p-8 rounded-3xl border border-slate-700/40 bg-slate-900/60 shadow-2xl backdrop-blur-xl">
+            
+            <h2 class="text-xl font-bold text-emerald-400 mb-6 text-center tracking-wide">
+                تحويل العملات بأسعار الصرف
+            </h2>
+
+            <!-- Amount Input -->
+            <div class="mb-5">
+                <label class="block text-xs font-medium mb-2 text-slate-400">المبلغ المراد تحويله:</label>
+                <input type="number" id="amount" value="1" min="1" 
+                    class="w-full bg-slate-950/70 border border-slate-700/80 rounded-2xl p-3.5 text-slate-100 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-xl font-bold transition duration-300 shadow-inner" placeholder="أدخل المبلغ...">
+            </div>
+
+            <!-- Currency Selectors -->
+            <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 items-center mb-6">
+                <!-- From Currency -->
+                <div class="sm:col-span-2">
+                    <label class="block text-xs text-slate-400 mb-1.5">من عملة:</label>
+                    <select id="fromCurrency" class="w-full bg-slate-950/70 border border-slate-700/80 rounded-2xl p-3.5 text-slate-100 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 font-medium cursor-pointer transition duration-300 shadow-inner">
+                    </select>
+                </div>
+
+                <!-- Swap Button -->
+                <div class="sm:col-span-1 flex justify-center pt-2 sm:pt-4">
+                    <button onclick="swapCurrencies()" class="p-3.5 bg-slate-800/80 hover:bg-emerald-500 hover:text-slate-950 rounded-full transition-all duration-300 text-emerald-400 shadow-lg border border-slate-700 hover:border-emerald-400 hover:scale-110 active:scale-95 cursor-pointer">
+                        🔄
+                    </button>
+                </div>
+
+                <!-- To Currency -->
+                <div class="sm:col-span-2">
+                    <label class="block text-xs text-slate-400 mb-1.5">إلى عملة:</label>
+                    <select id="toCurrency" class="w-full bg-slate-950/70 border border-slate-700/80 rounded-2xl p-3.5 text-slate-100 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 font-medium cursor-pointer transition duration-300 shadow-inner">
+                    </select>
+                </div>
+            </div>
+
+            <!-- Convert Button -->
+            <button onclick="convertCurrency()" class="w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-black py-4 rounded-2xl transition duration-300 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-base tracking-wide">
+                تحويل الآن
+            </button>
+
+            <!-- Result Box -->
+            <div id="resultBox" class="bg-slate-950/80 p-5 rounded-2xl border border-emerald-500/30 text-center hidden mt-6 shadow-inner">
+                <p class="text-xs text-slate-400 mb-1">النتيجة التقديرية:</p>
+                <div id="resultText" class="text-3xl font-black bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">0.00</div>
+                <p id="rateDetail" class="text-xs text-slate-400 mt-2 font-mono">سعر الصرف المباشر</p>
+            </div>
+
+            <!-- Loader -->
+            <div id="loader" class="hidden text-center py-4 mt-4">
+                <div class="inline-block animate-spin rounded-full h-7 w-7 border-3 border-emerald-400 border-t-transparent"></div>
+                <p class="text-xs text-slate-400 mt-2">جاري تجديد أسعار الصرف...</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 border-t border-slate-800/80 text-xs text-slate-500 relative z-10">
+        By Adam Raslan © 2026
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
